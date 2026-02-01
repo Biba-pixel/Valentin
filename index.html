@@ -42,7 +42,7 @@
             animation: fadeIn 0.8s ease;
             flex-direction: column;
             align-items: center;
-            padding-bottom: 50px;
+            padding-bottom: 80px; /* Extra padding for scrolling space */
         }
         
         .screen.active {
@@ -69,34 +69,29 @@
             line-height: 1.6;
         }
 
-        /* Photo Gallery - Horizontal Scroll */
+        /* Photo Gallery - Vertical Stack */
         .gallery-container {
             width: 100%;
-            overflow-x: auto;
             padding-bottom: 20px;
-            margin-bottom: 20px;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .gallery-container::-webkit-scrollbar {
-            display: none;
+            margin-bottom: 30px;
         }
 
         .gallery {
             display: flex;
-            gap: 15px;
-            padding: 0 10px;
-            width: max-content;
+            flex-direction: column; /* Changed to Vertical Column */
+            align-items: center;
+            gap: 35px; /* Space between vertical photos */
+            width: 100%;
             margin: 0 auto;
         }
 
         .photo-card {
-            width: 200px;
-            height: 280px;
+            width: 240px; /* Slightly larger for better vertical view */
+            height: 320px;
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(225, 29, 72, 0.15);
-            padding: 10px;
+            padding: 12px;
             box-sizing: border-box;
             transform: rotate(-2deg);
             transition: transform 0.3s ease;
@@ -107,7 +102,7 @@
         }
 
         .photo-card:nth-child(even) {
-            transform: rotate(2deg);
+            transform: rotate(2deg); /* Alternating rotation looks cute in vertical list */
         }
 
         /* Image styling */
@@ -120,9 +115,9 @@
         }
 
         .caption {
-            margin-top: 8px;
+            margin-top: 10px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         /* Buttons */
@@ -136,7 +131,7 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2);
-            margin: 10px;
+            margin: 15px 0; /* Vertical margin for stacked buttons */
             width: 80%; /* Nice width for mobile */
             max-width: 300px;
         }
@@ -203,12 +198,12 @@
                 <div class="gallery">
                     <div class="photo-card">
                         <!-- PHOTO 1: intro1.jpg -->
-                        <img src="intro1.jpg" alt="Nous deux" onerror="this.src='https://placehold.co/200x300/pink/white?text=intro1.jpg'">
+                        <img src="intro1.jpg" alt="Nous deux" onerror="this.src='https://placehold.co/240x320/pink/white?text=intro1.jpg'">
                         <div class="caption">Nous deux ❤️</div>
                     </div>
                     <div class="photo-card">
                         <!-- PHOTO 2: intro2.jpg -->
-                        <img src="intro2.jpg" alt="Toi" onerror="this.src='https://placehold.co/200x300/pink/white?text=intro2.jpg'">
+                        <img src="intro2.jpg" alt="Toi" onerror="this.src='https://placehold.co/240x320/pink/white?text=intro2.jpg'">
                         <div class="caption">Toi</div>
                     </div>
                 </div>
@@ -226,17 +221,17 @@
                 <div class="gallery">
                     <div class="photo-card" style="transform: rotate(3deg);">
                         <!-- PHOTO 3: gallery1.jpg -->
-                        <img src="gallery1.jpg" alt="Souvenir" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery1.jpg'">
+                        <img src="gallery1.jpg" alt="Souvenir" onerror="this.src='https://placehold.co/240x320/pink/white?text=gallery1.jpg'">
                         <div class="caption">Souvenir</div>
                     </div>
                     <div class="photo-card" style="transform: rotate(-3deg);">
                         <!-- PHOTO 4: gallery2.jpg -->
-                        <img src="gallery2.jpg" alt="Bonheur" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery2.jpg'">
+                        <img src="gallery2.jpg" alt="Bonheur" onerror="this.src='https://placehold.co/240x320/pink/white?text=gallery2.jpg'">
                         <div class="caption">Bonheur</div>
                     </div>
                     <div class="photo-card" style="transform: rotate(1deg);">
                         <!-- PHOTO 5: gallery3.jpg -->
-                        <img src="gallery3.jpg" alt="Amour" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery3.jpg'">
+                        <img src="gallery3.jpg" alt="Amour" onerror="this.src='https://placehold.co/240x320/pink/white?text=gallery3.jpg'">
                         <div class="caption">Amour</div>
                     </div>
                 </div>
