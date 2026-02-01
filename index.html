@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour ma Valentine</title>
+    <!-- Importing Google Fonts for a romantic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffe4e6; /* Soft pink background */
+            background-image: radial-gradient(#ffccd5 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            color: #881337;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin-top: 40px;
+            z-index: 1;
+            /* Flex layout for centering content in screens */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Screen Management */
+        .screen {
+            display: none; /* Hidden by default */
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+        
+        .screen.active {
+            display: flex; /* Only active screen is shown */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #e11d48;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+            line-height: 1.3;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Photo Gallery - Horizontal Scroll */
+        .gallery-container {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 15px;
+            padding: 0 10px;
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            width: 200px;
+            height: 280px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(225, 29, 72, 0.15);
+            padding: 10px;
+            box-sizing: border-box;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .photo-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        /* Image styling */
+        .photo-card img {
+            width: 100%;
+            height: 85%;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: #ffe4e6;
+        }
+
+        .caption {
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.2);
+            margin: 10px;
+            width: 80%; /* Nice width for mobile */
+            max-width: 300px;
+        }
+
+        .btn-primary {
+            background-color: #e11d48;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #fff;
+            color: #e11d48;
+            border: 2px solid #e11d48;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Special buttons for final screen */
+        .final-btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+        
+        .final-btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        /* Floating hearts background */
+        .floating-heart {
+            position: fixed;
+            color: rgba(225, 29, 72, 0.1);
+            font-size: 2rem;
+            animation: floatUp 8s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Decor -->
+    <div class="floating-heart" style="left: 10%; animation-duration: 7s;">♥</div>
+    <div class="floating-heart" style="left: 80%; animation-duration: 9s; font-size: 1.5rem;">♥</div>
+    <div class="floating-heart" style="left: 40%; animation-duration: 12s;">♥</div>
+
+    <div class="container">
+
+        <!-- SCREEN 1: Intro -->
+        <div id="screen1" class="screen active">
+            <h1>Coucou toi... 🌹</h1>
+            <p>J'ai quelque chose de spécial à te demander...</p>
+            
+            <div class="gallery-container">
+                <div class="gallery">
+                    <div class="photo-card">
+                        <!-- PHOTO 1: intro1.jpg -->
+                        <img src="intro1.jpg" alt="Nous deux" onerror="this.src='https://placehold.co/200x300/pink/white?text=intro1.jpg'">
+                        <div class="caption">Nous deux ❤️</div>
+                    </div>
+                    <div class="photo-card">
+                        <!-- PHOTO 2: intro2.jpg -->
+                        <img src="intro2.jpg" alt="Toi" onerror="this.src='https://placehold.co/200x300/pink/white?text=intro2.jpg'">
+                        <div class="caption">Toi</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="showScreen(2)">Suivant ➡️</button>
+        </div>
+
+        <!-- SCREEN 2: More Photos + The Question -->
+        <div id="screen2" class="screen">
+            <h1>Juste un instant...</h1>
+            <p>Regarde comme on est beaux ensemble 😍</p>
+
+            <div class="gallery-container">
+                <div class="gallery">
+                    <div class="photo-card" style="transform: rotate(3deg);">
+                        <!-- PHOTO 3: gallery1.jpg -->
+                        <img src="gallery1.jpg" alt="Souvenir" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery1.jpg'">
+                        <div class="caption">Souvenir</div>
+                    </div>
+                    <div class="photo-card" style="transform: rotate(-3deg);">
+                        <!-- PHOTO 4: gallery2.jpg -->
+                        <img src="gallery2.jpg" alt="Bonheur" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery2.jpg'">
+                        <div class="caption">Bonheur</div>
+                    </div>
+                    <div class="photo-card" style="transform: rotate(1deg);">
+                        <!-- PHOTO 5: gallery3.jpg -->
+                        <img src="gallery3.jpg" alt="Amour" onerror="this.src='https://placehold.co/200x300/pink/white?text=gallery3.jpg'">
+                        <div class="caption">Amour</div>
+                    </div>
+                </div>
+            </div>
+
+            <h1>Alors, dis-moi... <br>Veux-tu être ma Valentine ? 🌹</h1>
+            
+            <button class="btn btn-secondary" onclick="showScreen(3)">Oui ❤️</button>
+            <button class="btn btn-primary" onclick="showScreen(3)">Absolument ! 😍</button>
+        </div>
+
+        <!-- SCREEN 3: Final Reveal -->
+        <div id="screen3" class="screen">
+            <h1>Yesss ! 🎉</h1>
+            <p>Maintenant, tu as deux choix...</p>
+
+            <!-- Button 1: Instagram -->
+            <button class="btn final-btn-instagram" onclick="openInstagram()">
+                Clique pour voir la plus belle fille du monde 👑
+            </button>
+
+            <!-- Button 2: WhatsApp -->
+            <button class="btn final-btn-whatsapp" onclick="openWhatsApp()">
+                Clique pour discuter avec le gars le plus chanceux 🍀
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        /* --------------------------------------------------
+           CONFIGURATION
+           -------------------------------------------------- */
+        
+        // 1. Enter your WhatsApp Number (Country code + number)
+        const myPhoneNumber = "96176469338"; 
+        
+        // 2. Enter HER Instagram Username (without the @)
+        const herInstagramUsername = "michellechoueiry"; 
+
+        // 3. The Message she sends you
+        const whatsappMessage = "Can't wait la valentin , my valentine pour toujours !";
+
+        /* --------------------------------------------------
+           LOGIC
+           -------------------------------------------------- */
+
+        function showScreen(screenNumber) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            // Show requested screen
+            document.getElementById('screen' + screenNumber).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0,0);
+        }
+
+        function openInstagram() {
+            window.location.href = `https://instagram.com/${herInstagramUsername}`;
+        }
+
+        function openWhatsApp() {
+            const url = `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
