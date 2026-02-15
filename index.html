@@ -162,6 +162,64 @@
             color: white;
         }
 
+        /* Heart Button */
+        .heart-btn {
+            background: none;
+            border: none;
+            font-size: 4rem;
+            cursor: pointer;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin-top: 30px;
+            filter: drop-shadow(0 5px 15px rgba(225, 29, 72, 0.3));
+            transition: transform 0.2s;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Music Player Styling */
+        .music-player {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(225, 29, 72, 0.2);
+            margin: 30px 0;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .music-player audio {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .song-title {
+            font-family: 'Pacifico', cursive;
+            color: #e11d48;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Love Message Box */
+        .love-message {
+            background: linear-gradient(135deg, #fff 0%, #ffe4e6 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(225, 29, 72, 0.15);
+            margin: 20px 0;
+            border: 3px solid #e11d48;
+            max-width: 500px;
+            line-height: 1.8;
+            font-size: 1.15rem;
+            text-align: left;
+        }
+
         /* Floating hearts background */
         .floating-heart {
             position: fixed;
@@ -257,6 +315,33 @@
             <button class="btn final-btn-whatsapp" onclick="openWhatsApp()">
                 Clique pour discuter avec le gars le plus chanceux 🍀
             </button>
+
+            <!-- Heart Button to reveal special page -->
+            <button class="heart-btn" onclick="showScreen(4)" title="Clique sur mon cœur...">❤️</button>
+        </div>
+
+        <!-- SCREEN 4: Special Message with Music -->
+        <div id="screen4" class="screen">
+            <h1>Pour toi, mon amour... 💕</h1>
+            
+            <!-- Music Player -->
+            <div class="music-player">
+                <div class="song-title" id="songTitleDisplay">Notre chanson ♪</div>
+                <audio id="loveSong" controls autoplay loop>
+                    <source src="song.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+            </div>
+
+            <!-- Personalized Love Message -->
+            <div class="love-message" id="loveMessageBox">
+                <p><strong>Ma chérie,</strong></p>
+                <p>Chaque moment avec toi est un cadeau précieux. Tu illumines ma vie de ton sourire, et chaque jour à tes côtés est une bénédiction.</p>
+                <p>Je t'aime plus que les mots ne peuvent l'exprimer. 💖</p>
+                <p style="text-align: right; margin-top: 20px;"><em>Ton amour pour toujours</em></p>
+            </div>
+
+            <button class="btn btn-primary" onclick="showScreen(3)">← Retour</button>
         </div>
 
     </div>
@@ -275,6 +360,23 @@
         // 3. The Message she sends you
         const whatsappMessage = "Can't wait la valentin , my valentine pour toujours ! i loveu ya oomri aktar men kel shi b he l dene !";
 
+        // 4. SPECIAL PAGE CONFIGURATION
+        // Song title to display
+        const songTitle = "Every Breath You Take - The Police ♪";
+        
+        // Your personalized love message (HTML allowed)
+        const loveMessage = `
+            <p><strong>Mon amour,</strong></p>
+            <p>From the moment I met you, you showed me how amazing you are, how independent you are, how smart you are. You are the definition of perfection.</p>
+            <p>The last 24 hours, I have disappointed you and hurt you and I will never forgive myself for this. I will never accept to make you feel this way ever again and I will never allow anyone to make you feel this way ever again.</p>
+            <p>Tu es ma boubine, ma meilleure amie et mon amour en même temps. Tu m'as donné une opportunité pour bien préparer notre soirée tout seul et je t'ai déçue. Je suis sincèrement désolé d'avoir tout ruiné mais je suis encore plus désolé de la façon dont je t'ai parlé le lendemain et comment j'ai traité la situation. Je me suis perdu dans mes pensées et en faisant cela j'ai blessé ma copine avec qui je veux planifier toute ma vie.</p>
+            <p>Je suis désolé de tout mon cœur, je t'envoie plein de bisous et j'espère que je pourrai me racheter.</p>
+            <p>B7ebbik aktar men kel shi and you deserve nothing but the best ya oomri. I loveu.</p>
+            <p>You were stunning that night, you always are, you always will be. Don't ever doubt how perfect you are because I never do either. I hope you will receive all the good that you deserve.</p>
+            <p><strong>Je t'aime</strong> 💕</p>
+            <p style="text-align: right; margin-top: 20px;"><em>Charbel</em></p>
+        `;
+
         /* --------------------------------------------------
            LOGIC
            -------------------------------------------------- */
@@ -284,6 +386,18 @@
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             // Show requested screen
             document.getElementById('screen' + screenNumber).classList.add('active');
+            
+            // If showing screen 4, update the message and song title
+            if (screenNumber === 4) {
+                document.getElementById('loveMessageBox').innerHTML = loveMessage;
+                document.getElementById('songTitleDisplay').textContent = songTitle;
+                
+                // Play the song automatically
+                const loveSong = document.getElementById('loveSong');
+                loveSong.play().catch(err => {
+                    console.log("Autoplay prevented by browser. User will need to click play.");
+                });
+            }
             
             // Scroll to top
             window.scrollTo(0,0);
